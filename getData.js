@@ -20,3 +20,5 @@ fetch(apiURL)
     // Handling any errors
     console.error("Error fetching data:", error);
   });
+
+  
