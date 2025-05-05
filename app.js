@@ -4,30 +4,24 @@
 //     .then(data => console.log(data))
 // }
 
-function loadData() {
-  fetch("https://jsonplaceholder.typicode.com/todos")
-    .then((res) => res.json())
-    .then((data) => displayUsers(data));
-}
+const todoUrl = "https://jsonplaceholder.typicode.com/todos";
+const userUrl = "https://jsonplaceholder.typicode.com/users";
 
-function displayData(data) {
-  for (const user of data) {
-    console.log(user.title);
+async function loadData() {
+  try {
+    const response = await fetch(userUrl);
+    const data = await response.json();
+    displayData(data);
+  } catch (error) {
+    console.error("failed to load data", error);
   }
 }
 
-function loadUsers() {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-    .then((data) => displayUsers(data));
-}
-
-function displayUsers(data) {
+function displayData(data) {
   for (user of data) {
-    // console.log(user.name);
-    let li = document.createElement("li");
-    li.innerText=user.name;
-    const userData = document.getElementById("user-list");
-    userData.appendChild(li);
+    const li = document.createElement("li");
+    li.innerText = user.name;
+
+    document.getElementById("user-list").appendChild(li);
   }
 }
